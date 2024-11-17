@@ -1,0 +1,3 @@
+Splash Screen Animada:
+npx expo install expo-splash-screen
+npx expo install expo-av
