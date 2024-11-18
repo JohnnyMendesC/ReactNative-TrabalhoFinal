@@ -1,0 +1,248 @@
+To call the API using a city name instead of latitude and longitude coordinates, you can use the Geocoding API to convert the city name to its geographical coordinates (latitude and longitude). Once you have the coordinates, you can then use them to make your API call. Here's a step-by-step process:
+
+First, use the Geocoding API to convert the city name to coordinates:
+
+https://api.openweathermap.org/geo/1.0/direct?q={city name}&limit=1&appid={API key}
+Replace
+{city name}
+with the name of your city and
+{API key}
+with your unique API key.
+
+The Geocoding API response will include the latitude (
+lat
+) and longitude (
+lon
+) of the city. Extract these values from the response.
+
+Use the obtained latitude and longitude in your API call. For example, if you're using the Current Weather Data API, the call would look like this:
+
+https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+Replace
+{lat}
+and
+{lon}
+with the latitude and longitude values obtained from the Geocoding API, and
+{API key}
+with your unique API key.
+
+Please note that built-in geocoder functionality has been deprecated in some APIs, and it's recommended to use the Geocoding API for converting city names to coordinates and vice versa.
+
+For more information, please visit the OpenWeather documentation:
+https://openweathermap.org/current
+
+////////// exemplo request
+///////
+>>>Nome para coordenada
+// 20241117211732
+// https://api.openweathermap.org/geo/1.0/direct?q=Petr%C3%B3polis&limit=1&appid=fddf1172100f1baa6c0a0f6fc01c8711
+
+[
+  {
+    "name": "Petrópolis",
+    "local_names": {
+      "pt": "Petrópolis"
+    },
+    "lat": -22.5075743,
+    "lon": -43.1785356,
+    "country": "BR",
+    "state": "Rio de Janeiro"
+  }
+]
+
+////////
+Coordenada para dados climáticos
+// 20241117212017
+// https://api.openweathermap.org/data/2.5/weather?lat=-22.5075743&lon=-43.1785356&exclude=daily&appid=fddf1172100f1baa6c0a0f6fc01c8711&lang=pt_br&units=metric
+
+{
+  "coord": {
+    "lon": -43.1785,
+    "lat": -22.5076
+  },
+  "weather": [
+    {
+      "id": 802,
+      "main": "Clouds",
+      "description": "nuvens dispersas",
+      "icon": "03n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 16.69,
+    "feels_like": 16.95,
+    "temp_min": 16.69,
+    "temp_max": 16.69,
+    "pressure": 1016,
+    "humidity": 97,
+    "sea_level": 1016,
+    "grnd_level": 939
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 1.83,
+    "deg": 353,
+    "gust": 1.81
+  },
+  "clouds": {
+    "all": 38
+  },
+  "dt": 1731889217,
+  "sys": {
+    "country": "BR",
+    "sunrise": 1731830462,
+    "sunset": 1731878087
+  },
+  "timezone": -10800,
+  "id": 3454031,
+  "name": "Petrópolis",
+  "cod": 200
+}
+
+
+///////////////////
+/////// erro de undefined
+To extract latitude and longitude from a response using Axios 
+in React Native, you typically make a request to an API that 
+returns location data, including latitude and longitude. Assuming 
+you're making a request to an API that returns location data 
+in JSON format, you can extract latitude and longitude from 
+the Axios response like this:
+
+First, ensure you have Axios installed in your React Native 
+project. If not, you can install it by running:
+
+npm install axios
+
+Then, you can use Axios to make a request to the API, and in the
+
+.then
+
+callback function, you can access the latitude and longitude 
+from the response data. Here's a basic example:
+
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { View, Text } from 'react-native';
+
+const App = () => {
+  useEffect(() => {
+    // Replace 'Your_API_Endpoint' with the actual endpoint you're calling
+    axios.get('Your_API_Endpoint')
+      .then(response => {
+        // Assuming the API response structure includes an object with latitude and longitude
+        const latitude = response.data.latitude;
+        const longitude = response.data.longitude;
+
+        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+      })
+      .catch(error => {
+        console.log('Error fetching data: ', error);
+      });
+  }, []);
+
+  return (
+    <View>
+      <Text>Check your console for latitude and longitude</Text>
+    </View>
+  );
+};
+
+export default App;
+
+
+In this example, replace
+'Your_API_Endpoint'
+with the actual endpoint URL you're using to fetch the location data. The
+
+response.data
+
+is where you typically find the data returned by the API, and you can access 
+the latitude and longitude properties based on the structure of the data 
+returned by your specific API.
+
+Please note, the exact path to access latitude and longitude in
+
+response.data
+
+may vary depending on the API you're using. You might need to adjust
+
+response.data.latitude
+and
+response.data.longitude
+
+to match the structure of your API response.
+
+If the API response structure is more complex, you may need to navigate
+through nested objects or arrays to find the latitude and values. You 
+can log
+
+response.data
+
+to the console to inspect the structure of the response and determine 
+the correct path to access the desired data.
+
+
+///////////
+Based on the logs you've provided, it appears that the
+response
+and
+response.data
+are JavaScript objects, which is why when you attempt to log them directly to the console using template literals, they are displayed as
+[object Object]
+. This is the default string representation of an object in JavaScript. To view the contents of these objects, you should use
+console.log
+directly on the object without converting it to a string, or use
+JSON.stringify
+to convert the object to a readable string format.
+
+Regarding the
+latitude
+and
+longitude
+being
+undefined
+, it suggests that these variables are not being correctly assigned values before they are logged. This could be due to several reasons, such as not properly extracting these values from the
+response
+object or these values not being present in the
+response
+object at all.
+
+To debug this, you can:
+
+Log the entire
+response
+object directly to see its structure and verify if it contains the latitude and longitude data:
+
+console.log('Response:', response);
+Use
+JSON.stringify
+to convert the
+response
+and
+response.data
+objects into a readable string format that can be logged:
+
+console.log(`Response: ${JSON.stringify(response, null, 2)}`);
+console.log(`Data: ${JSON.stringify(response.data, null, 2)}`);
+Ensure that you are correctly accessing the latitude and longitude properties from the
+response
+object. This step depends on the structure of your
+response
+object, which you can identify from step 1. For example, if the
+response
+object has a
+data
+property that contains the latitude and longitude, you might access them like so:
+
+const latitude = response.data.latitude;
+const longitude = response.data.longitude;
+console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+If
+latitude
+and
+longitude
+are still
+undefined
+, you'll need to verify that the API call is successful and that the response structure matches your expectations based on the API's documentation.

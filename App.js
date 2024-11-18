@@ -3,10 +3,10 @@ import { Splash } from './src/screens/Intro';
 import { Login } from './src/screens/Login';
 import { preventAutoHideAsync } from 'expo-splash-screen'
 
-preventAutoHideAsync();
+preventAutoHideAsync(); //comentado para pular intro
 
 export default function App() {
-  const [splashComplete, setSplashComplete] = useState(false);
+  const [splashComplete, setSplashComplete] = useState(false);//true para testes sem a intro, padrao false
   return (
     splashComplete
       ? <Login />
