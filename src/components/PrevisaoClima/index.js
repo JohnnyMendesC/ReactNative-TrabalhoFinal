@@ -7,7 +7,7 @@ import apiConversor from '../../services/apiConversor';
 
 export const Clima = () => {
 
-    const [dadosClima, setDadosClima] = useState(null);
+    const [dadosClima, setDadosClima] = useState();
     const [cidade, setCidade] = useState("");
     const [cidadeUser, setCidadeUser] = useState(null);
 
@@ -17,29 +17,30 @@ export const Clima = () => {
     const limparCidade = () => {
         setCidade("");
         setCidadeUser("");
-        inputRef.current.focus();
+        setDadosClima(null);
+        //inputRef.current.focus();
     };
 
     // Função executada para converter o nome da cidade em coordenadas, 
     // e buscar as coordenas para retornar dados climáticos daquela cidade
-    const buscar = async () => {    
+    const buscar = async () => {
         if (cidade.trim().length === 0) {
             Alert.alert("A cidade deve conter apenas letras");
-            inputRef.current.focus();
+            //inputRef.current.focus();
             return;
         }
-    
+
         try {
-            // Requisição para obter coordenadas
+            // Requisição para obter as coordenadas para buscar os dados
             const nomeparacoordenadas = await apiConversor.get(`${cidade}&limit=1&appid=fddf1172100f1baa6c0a0f6fc01c8711`);
             const cidadeData = nomeparacoordenadas.data[0];
-    
+
             if (!cidadeData) {
                 Alert.alert("Cidade não encontrada");
                 return;
-            }    
+            }
             const { lat: latitude, lon: longitude } = cidadeData;
-    
+
             // Requisição para obter os dados climáticos
             try {
                 const coordparadados = await apiClima.get('', {
@@ -51,14 +52,14 @@ export const Clima = () => {
                         units: 'metric',
                     },
                 });
-    
+
                 // Atualizaçãoe do estado com as informações
                 setDadosClima(coordparadados.data);
                 console.log("Dados recebidos: ", coordparadados.data);
-    
+
                 // Armazene a última cidade pesquisada
                 await AsyncStorage.setItem("@lastCidade", cidade);
-                inputRef.current.focus();
+                //inputRef.current.focus();
             } catch (error) {
                 console.error("Erro ao buscar dados climáticos:", error);
             }
@@ -86,7 +87,7 @@ export const Clima = () => {
                         {dadosClima.weather[0].description} - Umidade {dadosClima.main.humidity}%
                     </Text>
                     <Text style={styles.textoCard}>
-                        Vento: {dadosClima.wind.speed} m/s, Direção: {dadosClima.wind.deg}
+                        Vento: {dadosClima.wind.speed} m/s, Direção: {dadosClima.wind.deg}, {dadosClima.weather.icon}
                     </Text>
                 </View>
             ) : (
@@ -95,29 +96,46 @@ export const Clima = () => {
                 </View>
             )}
             {/* RETORNAR MENSAGEM DE ERRO SE CIDADE NÃO EXISTIR */}
-            < View style={styles.inputForm}>
-                <TextInput
-                    style={styles.inputCidade}
-                    role='text input'
-                    aria-label='Digite a cidade que deseja receber a previsão do tempo'
-                    type={'text'}
-                    value={cidade}
-                    onChangeText={(texto) => setCidade(texto)}
-                    ref={inputRef}
-                    placeholder='Digite a Cidade'
-                />
-                <TouchableOpacity
-                    style={styles.botaoConfirmarCidade}
-                    role='button'
-                    aria-label='Confirmar cidade escolhida para receber previsão do tempo'
-                    title='Confirmar cidade'
-                    onPress={buscar}
-                >
-                    <Text style={styles.textoBotaoConfirmarCidade}>
-                        Confirmar Cidade
-                    </Text>
-                </TouchableOpacity>
-            </View >
+
+            {dadosClima ? (
+                < View style={styles.inputForm}>
+                    <TouchableOpacity
+                        style={styles.botaoConfirmarCidade}
+                        role='button'
+                        aria-label='Confirmar cidade escolhida para receber previsão do tempo'
+                        title='Confirmar cidade'
+                        onPress={limparCidade}
+                    >
+                        <Text style={styles.textoBotaoConfirmarCidade}>
+                            Trocar Cidade
+                        </Text>
+                    </TouchableOpacity>
+                </View >
+            ) : (
+                < View style={styles.inputForm}>
+                    <TextInput
+                        style={styles.inputCidade}
+                        role='text input'
+                        aria-label='Digite a cidade que deseja receber a previsão do tempo'
+                        type={'text'}
+                        value={cidade}
+                        onChangeText={(texto) => setCidade(texto)}
+                        ref={inputRef}
+                        placeholder='Digite a Cidade'
+                    />
+                    <TouchableOpacity
+                        style={styles.botaoConfirmarCidade}
+                        role='button'
+                        aria-label='Confirmar cidade escolhida para receber previsão do tempo'
+                        title='Confirmar cidade'
+                        onPress={buscar}
+                    >
+                        <Text style={styles.textoBotaoConfirmarCidade}>
+                            Confirmar Cidade
+                        </Text>
+                    </TouchableOpacity>
+                </View >
+            )}
         </View >
     )
 }
