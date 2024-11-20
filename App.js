@@ -6,7 +6,7 @@ import { preventAutoHideAsync } from 'expo-splash-screen'
 preventAutoHideAsync(); //comentado para pular intro
 
 export default function App() {
-  const [splashComplete, setSplashComplete] = useState(false);//true para testes sem a intro, padrao false
+  const [splashComplete, setSplashComplete] = useState(true);//true para testes sem a intro, padrao false
   return (
     splashComplete
       ? <Login />

@@ -1,0 +1,5 @@
+f03115 laranja
+0394b6 azul
+000000 preto
+861388 magenta escuro
+faf6f6 neve
