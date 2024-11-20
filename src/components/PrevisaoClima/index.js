@@ -92,7 +92,7 @@ export const Clima = () => {
                 </View>
             ) : (
                 <View style={styles.card}>
-                    <Text style={styles.textoCard}>Carregando informações...</Text>
+                    <Text style={styles.textoCard}>Escolha uma cidade para acompanhar sua previsão climática</Text>
                 </View>
             )}
             {/* RETORNAR MENSAGEM DE ERRO SE CIDADE NÃO EXISTIR */}
