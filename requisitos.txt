@@ -15,10 +15,10 @@ Objetivos: Montar um app com tema livre com os seguintes requisitos:
 
 • Criar uma autenticação
 
-• Utilizar o AsyncStorage 
+• Utilizar o AsyncStorage (Johnny)
 
 Bônus (Extra):
 • Monitoramento de conexão à internet, caso o dispositivo não tenha acesso a
-internet, exibir essa informação. (aberto) PESQUISAR
+internet, exibir essa informação. (Johnny) PESQUISAR
 
 • Splash Screen com Animação de entrada no aplicativo. (Johnny)
