@@ -11,5 +11,6 @@ export default function App() {
     splashComplete
       ? <Login />
       : <Splash onComplete={setSplashComplete} />
+    
   );
 }
