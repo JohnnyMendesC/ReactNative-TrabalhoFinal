@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { preventAutoHideAsync } from 'expo-splash-screen';
-import Navigation from './src/Navigation/Navigation';
+import Navigation from './src/navigation/Navigation';
 import { Splash } from './src/screens/Intro';
 import { Login } from './src/screens/Login';
 
