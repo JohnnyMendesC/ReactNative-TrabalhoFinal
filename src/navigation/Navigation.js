@@ -1,67 +1,53 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
 import { NavigationContainer } from '@react-navigation/native';
-import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
+import Home from '../screens/Home';
+import Perfil from '../screens/Perfil';
+import Grupos from '../screens/Grupos';
 
+const Tab = createBottomTabNavigator();  
 
-function HomeScreen() {
-  return (
-    <View>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-
-function ProfileScreen() {
-  return (
-    <View>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-
-function SettingsScreen() {
-  return (
-    <View>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-}
-
-
-const Tab = createBottomTabNavigator();
-
-export default function App() {
+const Navigation = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
+        
+          animationEnabled: true,
+          gestureEnabled: true,
+
+          
           tabBarIcon: ({ color, size }) => {
             let iconName;
 
             if (route.name === 'Home') {
               iconName = 'home';
-            } else if (route.name === 'Profile') {
+            } else if (route.name === 'Perfil') {
               iconName = 'user';
-            } else if (route.name === 'Settings') {
-              iconName = 'cogs';
+            } else if (route.name === 'Grupos') {
+              iconName = 'users';
             }
 
             return <Icon name={iconName} size={size} color={color} />;
           },
+          
+          
+          tabBarStyle: {
+            backgroundColor: 'black', 
+          },
+          
+        
+          tabBarActiveTintColor: '#F03115',  
+          tabBarInactiveTintColor: 'gray', 
         })}
-        tabBarOptions={{
-          activeTintColor: 'tomato',
-          inactiveTintColor: 'gray',
-        }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Perfil" component={Perfil} />
+        <Tab.Screen name="Grupos" component={Grupos} />
       </Tab.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default Navigation;
