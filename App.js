@@ -1,16 +1,19 @@
+
 import { useState } from 'react';
 import { Splash } from './src/screens/Intro';
 import { Login } from './src/screens/Login';
-import Header from './src/components/Header'; // Importa o Header
+import Header from './src/components/Header';
 import { preventAutoHideAsync } from 'expo-splash-screen';
 
-preventAutoHideAsync(); //comentado para pular intro
+preventAutoHideAsync(); 
 
 export default function App() {
-  const [splashComplete, setSplashComplete] = useState(false);//true para testes sem a intro, padrao false
+  const [splashComplete, setSplashComplete] = useState(false); 
+
   return (
-    splashComplete
-      ? <Login />
-      : <Splash onComplete={setSplashComplete} />
+    <>
+      <Header /> 
+      {splashComplete ? <Login /> : <Splash onComplete={setSplashComplete} />}
+    </>
   );
 }
