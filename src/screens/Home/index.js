@@ -8,7 +8,11 @@ const Home = () => {
   return (
     <View>
      <Clima />
-     <Text> Home</Text>
+     <View>
+        <Text> 
+          Home
+        </Text>
+     </View>
     </View>
   );
 };
