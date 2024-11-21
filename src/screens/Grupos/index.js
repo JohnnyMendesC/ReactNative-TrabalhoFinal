@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const HomeScreen = () => {
+const Grupos = () => {
   return (
     <View>
-      <Text>Home Screen</Text>
+      <Text>Grupos</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default Grupos;
