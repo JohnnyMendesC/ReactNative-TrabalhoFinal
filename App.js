@@ -4,6 +4,7 @@ import Header from './src/components/Header';
 import { preventAutoHideAsync } from 'expo-splash-screen';
 import Navigation from './src/navigation/Navigation'; 
 
+
 preventAutoHideAsync();
 
 export default function App() {
@@ -14,5 +15,6 @@ export default function App() {
       <Header />
       {splashComplete ? <Navigation /> : <Splash onComplete={setSplashComplete} />}
     </>
+
   );
 }

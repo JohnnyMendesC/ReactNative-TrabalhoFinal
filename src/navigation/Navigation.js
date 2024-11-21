@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Home from '../screens/Home';
 import Perfil from '../screens/Perfil';
 import Grupos from '../screens/Grupos';
+import Cadastro from '../screens/Cadastro';
 
 const Tab = createBottomTabNavigator();  
 const Navigation = () => {
@@ -27,6 +28,9 @@ const Navigation = () => {
             } else if (route.name === 'Grupos') {
               iconName = 'users';
             }
+              else if (route.name === 'Cadastro') {
+            iconName = 'edit';
+          }
 
             return <Icon name={iconName} size={size} color={color} />;
           },
@@ -44,6 +48,7 @@ const Navigation = () => {
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Perfil" component={Perfil} />
         <Tab.Screen name="Grupos" component={Grupos} />
+        <Tab.Screen name="Cadastro" component={Cadastro} />
       </Tab.Navigator>
     </NavigationContainer>
   );
