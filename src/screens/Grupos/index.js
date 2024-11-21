@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const Perfil = () => {
+const Grupos = () => {
   return (
     <View>
-      <Text>Perfil , definições e atividades.</Text>
+      <Text>Grupos</Text>
     </View>
   );
 };
 
-export default Perfil;
+export default Grupos;
