@@ -1,12 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Clima } from '../../components/PrevisaoClima';
 
-const HomeScreen = () => {
+
+const Home = () => {
+
   return (
     <View>
-      <Text>Home Screen</Text>
+     <Clima />
+     <Text> Home</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default Home;
