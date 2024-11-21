@@ -45,6 +45,8 @@ const Navigation = () => {
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Perfil" component={Perfil} />
         <Tab.Screen name="Grupos" component={Grupos} />
+        <Tab.Screen name="Cadastro" component={Cadastro} />
+
       </Tab.Navigator>
     </NavigationContainer>
   );
