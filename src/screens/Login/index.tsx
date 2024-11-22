@@ -12,7 +12,7 @@ export function Login() {
   const [senha, setSenha] = useState('');
   return (
     <View style={[styles.container, {justifyContent: 'center'}]}>
-      <Clima />
+      
       <MyTextInput 
         placeholder="email" 
         value={email} 

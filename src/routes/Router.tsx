@@ -3,7 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AppStack } from './AppStack';
 import { useAuth } from '../contexts/Auth';
 import { AuthStack } from './AuthStack';
-import { Text, View } from 'react-native-reanimated/lib/typescript/Animated';
+import { Text, View } from 'react-native';
+// import Animated from 'react-native-reanimated';
+
 
 export function Router() {
 
