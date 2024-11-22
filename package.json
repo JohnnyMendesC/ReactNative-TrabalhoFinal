@@ -36,7 +36,8 @@
     "react-native-web": "~0.19.13",
     "reanimated": "^0.0.1-alpha",
     "styled-components": "^6.1.13",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "@expo/vector-icons": "^14.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
