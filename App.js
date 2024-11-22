@@ -4,7 +4,7 @@ import Navigation from './src/navigation/Navigation';
 import { Splash } from './src/screens/Intro';
 import Header from './src/components/Header';
 import { AuthProvider } from './src/contexts/Auth';
-import { Router } from './src/routes/Router';
+import { Router } from './src/routes/Router.tsx';
 
 preventAutoHideAsync();
 
@@ -27,6 +27,7 @@ export default function App() {
     </>
     <AuthProvider>
         <Router />
-    </AuthProvider></>
+    </AuthProvider>
+    </>
   );
 }
