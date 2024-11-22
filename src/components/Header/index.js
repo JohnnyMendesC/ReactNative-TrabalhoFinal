@@ -130,7 +130,7 @@ const CardClima = ({ dadosClima, buscarDadosClimaticos, setCidade, cidade, ultim
       {dadosClima && (
         <TouchableOpacity
           style={styles.botaoAtualizarDados}
-          onPress={() => buscarDadosClimaticos(cidade)}
+          onPress={() => buscarDadosClimaticos(cidade, true)}
         >
           <Text style={styles.textoBotaoAtualizar}>Atualizar Previsão</Text>
         </TouchableOpacity>
