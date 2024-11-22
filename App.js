@@ -30,11 +30,7 @@ export default function App() {
         )}
       </ClimaProvider>
       <AuthProvider>
-
-    </AuthProvider>
-
       </AuthProvider>
-
     </>
   );
 }
