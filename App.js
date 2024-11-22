@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import Navigation from './src/navigation/Navigation';
 import { Splash } from './src/screens/Intro';
 import Header from './src/components/Header';
-import { AuthProvider } from './src/contexts/Auth';
-import { Router } from './src/routes/Router';
 import { ClimaProvider } from './src/components/ClimaContext';
 import { View } from 'react-native';
 export default function App() {
@@ -21,9 +19,6 @@ export default function App() {
           </View>
         )}
       </ClimaProvider>
-      <AuthProvider>
-        <Router />
-      </AuthProvider>
     </>
   );
 }
