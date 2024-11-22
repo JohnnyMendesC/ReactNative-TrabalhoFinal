@@ -7,7 +7,7 @@ const Header = () => {
   const [text, setText] = useState('');
   const { dadosClima, buscarDadosClimaticos, setCidade, cidade, ultimaAtualizacao } = useContext(ClimaContext);
   const [modalVisible, setModalVisible] = useState(false);
-  if (!dadosClima) return null;
+  
 
   return (
     <View style={styles.container}>
@@ -30,7 +30,7 @@ const Header = () => {
 
       <View style={styles.climaHeader}>
         <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text style={styles.textoCidade}>{dadosClima ? `${dadosClima.name}` : "Clima"}</Text>
+          <Text style={styles.textoCidade}>{dadosClima ? `${dadosClima.name}` : "Confira o"}</Text>
           <Text style={styles.textoTemperatura}>{dadosClima ? `${dadosClima.main.temp}°C` : "Clima"}
             {dadosClima && (
               <Image
@@ -141,8 +141,8 @@ const CardClima = ({ dadosClima, buscarDadosClimaticos, setCidade, cidade, ultim
 
 const styles = StyleSheet.create({
   container: {
-    height: 55,
-    width: 'auto',
+    minHeight: 55,
+    minWidthwidth: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
