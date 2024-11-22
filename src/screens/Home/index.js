@@ -87,23 +87,7 @@ const Home = ({ navigation }) => {
         />
       </View>
 
-      <Text style={styles.welcomeText}>Bem-vindo a JUNTOS!</Text>
-  
-
-      {/* <View style={styles.buttonsContainer}>
-        <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#6200ea' }]}
-          onPress={handleNavigate}
-        >
-          <Text style={styles.buttonText}>Ir para detalhes</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#03a9f4' }]}
-          onPress={() => navigation.navigate('Settings')}
-        >
-          <Text style={styles.buttonText}>Configurações</Text>
-        </TouchableOpacity>
-      </View> */}
+    
 
       <View style={styles.postsContainer}>
         {posts.map((post) => (
@@ -149,7 +133,7 @@ const styles = StyleSheet.create({
   },
   videoContainer: {
     width: '100%',
-    marginBottom: 20,
+    backgroundColor:'black'
   },
   video: {
     width: '100%',
