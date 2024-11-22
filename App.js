@@ -5,28 +5,29 @@ import { Splash } from './src/screens/Intro';
 import Header from './src/components/Header';
 import { AuthProvider } from './src/contexts/Auth';
 import { Router } from './src/routes/Router';
+import { ClimaProvider } from './src/components/ClimaContext';
+import { View } from 'react-native';
 
-preventAutoHideAsync();
+//preventAutoHideAsync();
 
 export default function App() {
-  const [splashComplete, setSplashComplete] = useState(false);
+  const [splashComplete, setSplashComplete] = useState(true);
 
   return (
-    <><>
-
-      <Header />
-
-      {!splashComplete ? (
-        <Splash onComplete={() => setSplashComplete(true)} />
-      ) : (
-        <>
-
-          <Navigation />
-        </>
-      )}
-    </>
-    <AuthProvider>
+    <>
+      <ClimaProvider >
+        {!splashComplete ? (
+          <Splash onComplete={() => setSplashComplete(true)} />
+        ) : (
+          <View style={{ flex: 1 }}>
+            <Header />
+            <Navigation />
+          </View>
+        )}
+      </ClimaProvider>
+      <AuthProvider>
         <Router />
-    </AuthProvider></>
+      </AuthProvider>
+    </>
   );
 }

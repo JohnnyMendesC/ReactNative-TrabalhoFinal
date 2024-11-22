@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 
 const Cadastro = () => {
@@ -87,90 +87,92 @@ const Cadastro = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cadastro</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Nome"
-        value={nome}
-        onChangeText={setNome}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Sobrenome"
-        value={sobreNome}
-        onChangeText={setSobreNome}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="CEP"
-        value={cep}
-        onChangeText={setCep}
-        onBlur={buscarEndereco} 
-        keyboardType="numeric"
-        maxLength={8}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Endereço"
-        value={endereco}
-        onChangeText={setEndereco}
-        editable={false} 
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Bairro"
-        value={bairro}
-        onChangeText={setBairro}
-        editable={false} 
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Cidade"
-        value={cidade}
-        onChangeText={setCidade}
-        editable={false} 
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Estado"
-        value={estado}
-        onChangeText={setEstado}
-        editable={false}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="CPF (somente números)"
-        value={cpf}
-        onChangeText={(text) => setCpf(text.replace(/[^0-9]/g, ''))}
-        keyboardType="numeric"
-        maxLength={11}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Telefone (somente números)"
-        value={telefone}
-        onChangeText={(text) => setTelefone(text.replace(/[^0-9]/g, ''))}
-        keyboardType="phone-pad"
-        maxLength={11}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="E-mail"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        value={senha}
-        onChangeText={setSenha}
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.button} onPress={handleCadastro}>
-        <Text style={styles.buttonText}>Cadastrar</Text>
-      </TouchableOpacity>
+      <ScrollView>
+        <Text style={styles.title}>Cadastro</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Nome"
+          value={nome}
+          onChangeText={setNome}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Sobrenome"
+          value={sobreNome}
+          onChangeText={setSobreNome}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="CEP"
+          value={cep}
+          onChangeText={setCep}
+          onBlur={buscarEndereco}
+          keyboardType="numeric"
+          maxLength={8}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Endereço"
+          value={endereco}
+          onChangeText={setEndereco}
+          editable={false}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Bairro"
+          value={bairro}
+          onChangeText={setBairro}
+          editable={false}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Cidade"
+          value={cidade}
+          onChangeText={setCidade}
+          editable={false}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Estado"
+          value={estado}
+          onChangeText={setEstado}
+          editable={false}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="CPF (somente números)"
+          value={cpf}
+          onChangeText={(text) => setCpf(text.replace(/[^0-9]/g, ''))}
+          keyboardType="numeric"
+          maxLength={11}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Telefone (somente números)"
+          value={telefone}
+          onChangeText={(text) => setTelefone(text.replace(/[^0-9]/g, ''))}
+          keyboardType="phone-pad"
+          maxLength={11}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          value={senha}
+          onChangeText={setSenha}
+          secureTextEntry
+        />
+        <TouchableOpacity style={styles.button} onPress={handleCadastro}>
+          <Text style={styles.buttonText}>Cadastrar</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
