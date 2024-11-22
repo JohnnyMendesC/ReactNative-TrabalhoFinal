@@ -5,7 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Home from '../screens/Home';
 import Perfil from '../screens/Perfil';
 import Grupos from '../screens/Grupos';
-import Cadastro from '../screens/Cadastro'
+import Cadastro from '../screens/Cadastro';
+
 const Tab = createBottomTabNavigator();  
 
 const Navigation = () => {
@@ -13,11 +14,11 @@ const Navigation = () => {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-        
+
+         
           animationEnabled: true,
           gestureEnabled: true,
 
-          
           tabBarIcon: ({ color, size }) => {
             let iconName;
 
@@ -28,18 +29,21 @@ const Navigation = () => {
             } else if (route.name === 'Grupos') {
               iconName = 'users';
             }
+              else if (route.name === 'Cadastro') {
+            iconName = 'edit';
+          }
 
             return <Icon name={iconName} size={size} color={color} />;
           },
           
-          
           tabBarStyle: {
             backgroundColor: 'black', 
           },
-          
+
         
           tabBarActiveTintColor: '#F03115',  
           tabBarInactiveTintColor: 'gray', 
+
         })}
       >
         <Tab.Screen name="Home" component={Home} />
