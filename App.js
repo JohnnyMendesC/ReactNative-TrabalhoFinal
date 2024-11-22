@@ -3,6 +3,8 @@ import { preventAutoHideAsync } from 'expo-splash-screen';
 import Navigation from './src/navigation/Navigation';
 import { Splash } from './src/screens/Intro';
 import Header from './src/components/Header';
+import { AuthProvider } from './src/contexts/Auth';
+import { Router } from './src/routes/Router';
 
 preventAutoHideAsync();
 
@@ -10,18 +12,21 @@ export default function App() {
   const [splashComplete, setSplashComplete] = useState(false);
 
   return (
-    <>
+    <><>
 
-      <Header /> 
+      <Header />
 
       {!splashComplete ? (
         <Splash onComplete={() => setSplashComplete(true)} />
       ) : (
         <>
-        
+
           <Navigation />
         </>
       )}
     </>
+    <AuthProvider>
+        <Router />
+    </AuthProvider></>
   );
 }
