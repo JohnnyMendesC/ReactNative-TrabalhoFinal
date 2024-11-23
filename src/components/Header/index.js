@@ -8,6 +8,9 @@ const Header = () => {
   const { dadosClima, buscarDadosClimaticos, setCidade, cidade, ultimaAtualizacao } = useContext(ClimaContext);
   const [modalVisible, setModalVisible] = useState(false);
   
+  React.useEffect(() => {
+    console.log("Header montado");
+}, []);
 
   return (
     <View style={styles.container}>
@@ -46,7 +49,7 @@ const Header = () => {
       <Modal
         visible={modalVisible}
         transparent={true}
-        animationType="slide"
+        animationType="fade"
         onRequestClose={() => setModalVisible(false)}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
