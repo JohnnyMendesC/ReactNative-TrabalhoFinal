@@ -1,13 +1,14 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome'; 
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Home from '../screens/Home';
 import Perfil from '../screens/Perfil';
 import Grupos from '../screens/Grupos';
 import Cadastro from '../screens/Cadastro';
+import Login from '../screens/Login/login';
 
-const Tab = createBottomTabNavigator();  
+const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
   return (
@@ -15,7 +16,7 @@ const Navigation = () => {
       <Tab.Navigator
         screenOptions={({ route }) => ({
 
-         
+
           animationEnabled: true,
           gestureEnabled: true,
 
@@ -29,26 +30,28 @@ const Navigation = () => {
             } else if (route.name === 'Grupos') {
               iconName = 'users';
             }
-              else if (route.name === 'Cadastro') {
-            iconName = 'edit';
-          }
+            else if (route.name === 'Cadastro') {
+              iconName = 'edit';
+            }
+             else if (route.name === 'Login') {
+              iconName = 'sign-in'; 
+            }
 
             return <Icon name={iconName} size={size} color={color} />;
           },
-          
-          tabBarStyle: {
-            backgroundColor: 'black', 
-          },
 
-        
-          tabBarActiveTintColor: '#F03115',  
-          tabBarInactiveTintColor: 'gray', 
+          tabBarStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarActiveTintColor: '#F03115',
+          tabBarInactiveTintColor: 'gray',
 
         })}
       >
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Perfil" component={Perfil} />
         <Tab.Screen name="Grupos" component={Grupos} />
+        <Tab.Screen name="Login" component={Login} />
         <Tab.Screen name="Cadastro" component={Cadastro} />
 
       </Tab.Navigator>
