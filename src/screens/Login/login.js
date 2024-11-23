@@ -1,94 +1,105 @@
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Text } from "react-native";
-import EmailInput from "../../components/EmailInput";
-import PasswordInput from "../../components/PasswordInput";
-import { TextInput } from "react-native-gesture-handler";
-import apiAutenticacao from "../../services/apiAutenticacao";
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+} from 'react-native';
+import axios from 'axios';
 
-const response = await axios.get(apiAutenticacao, {
-  email,
-  senha
-});
-export default function Login() {
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
 
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [showSenha, setShowSenha] = useState(true);
+  const handleLogin = async () => {
+    if (!email || !senha) {
+      Alert.alert('Erro', 'Preencha todos os campos.');
+      return;
+    }
+
+    try {
+      const apiUrl = 'https://66fdc9cc69936930895633ef.mockapi.io/Cadastro';
+      const response = await axios.get(apiUrl);
+
+      const usuarios = response.data;
+      const usuarioValido = usuarios.find(
+        (usuario) => usuario.email === email && usuario.senha === senha
+      );
+
+      if (usuarioValido) {
+        Alert.alert('Sucesso', `Bem-vindo, ${usuarioValido.nome}!`);
+        
+      } else {
+        Alert.alert('Erro', 'E-mail ou senha inválidos.');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      Alert.alert(
+        'Erro',
+        'Não foi possível realizar o login. Tente novamente mais tarde.'
+      );
+    }
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Login</Text>
-      <EmailInput
+    <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
+      <TextInput
         style={styles.input}
-        placeholder="Digite seu email"
-        textContentType="email"
+        placeholder="E-mail"
         value={email}
-        setValue={setEmail}
         onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
       />
-
-      <PasswordInput
+      <TextInput
         style={styles.input}
-        placeholder="Digite sua senha"
-        secureTextEntry={true}
+        placeholder="Senha"
         value={senha}
-        showSenha={showSenha}
-        setShowSenha={setShowSenha}
         onChangeText={setSenha}
-      />
-
-      <TouchableOpacity 
-        style={styles.loginButton}
-        onPress={handleLogin}>
-        <Text style={styles.text}>Login</Text>
+        secureTextEntry
+        />
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
-
-        {/* <Text style={styles.login}>Login</Text>
-
-      <EmailInput value={email} setValue={setEmail} />
-      <PasswordInput
-        value={password}
-        setValue={setPassword}
-        showPassword={showPassword}
-        setShowPassword={setShowPassword}
-      />
-
-      <Button mode="contained" style={styles.loginButton}>
-        Login
-      </Button>
-      <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
-        <Text>
-          Não tem uma conta?{" "}
-          <Text style={styles.createAccountText}>Crie uma</Text>
-        </Text>
-      </TouchableOpacity> */}
-    </SafeAreaView>
+    </View>
   );
 };
 
+export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
     backgroundColor: '#f5f5f5',
+    justifyContent: 'center',
   },
-  input: {
+  title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
     color: '#333',
   },
-  loginButton: {
+  input: {
+    height: 50,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginBottom: 15,
+    backgroundColor: '#fff',
+  },
+  button: {
     backgroundColor: '#6200ee',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 10,
   },
-  text: {
+  buttonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
