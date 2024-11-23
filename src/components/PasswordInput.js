@@ -5,8 +5,8 @@ import { TextInput } from "react-native";
 const PasswordInput = ({
   value,
   setValue,
-  showPassword,
-  setShowPassword,
+  showSenha,
+  setShowSenha,
 }) => {
   return (
     <TextInput
@@ -15,21 +15,21 @@ const PasswordInput = ({
       value={value}
       onChangeText={(text) => setValue(text)}
       left={<TextInput.Icon name="lock" size={25} color="black" />}
-      secureTextEntry={showPassword}
+      secureTextEntry={showSenha}
       right={
-        showPassword ? (
+        showSenha ? (
           <TextInput.Icon
             name="eye"
             size={25}
             color="black"
-            onPress={() => setShowPassword(!showPassword)}
+            onPress={() => setShowSenha(!showSenha)}
           />
         ) : (
           <TextInput.Icon
             name="eye-off"
             size={25}
             color="black"
-            onPress={() => setShowPassword(!showPassword)}
+            onPress={() => setShowSenha(!showSenha)}
           />
         )
       }

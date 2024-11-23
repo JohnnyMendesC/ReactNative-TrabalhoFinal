@@ -4,16 +4,48 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Text } from "react-native";
 import EmailInput from "../../components/EmailInput";
 import PasswordInput from "../../components/PasswordInput";
+import { TextInput } from "react-native-gesture-handler";
+import apiAutenticacao from "../../services/apiAutenticacao";
 
+const response = await axios.get(apiAutenticacao, {
+  email,
+  senha
+});
 export default function Login() {
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(true);
+  const [senha, setSenha] = useState("");
+  const [showSenha, setShowSenha] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Text style={styles.login}>Login</Text>
+      <Text style={styles.text}>Login</Text>
+      <EmailInput
+        style={styles.input}
+        placeholder="Digite seu email"
+        textContentType="email"
+        value={email}
+        setValue={setEmail}
+        onChangeText={setEmail}
+      />
+
+      <PasswordInput
+        style={styles.input}
+        placeholder="Digite sua senha"
+        secureTextEntry={true}
+        value={senha}
+        showSenha={showSenha}
+        setShowSenha={setShowSenha}
+        onChangeText={setSenha}
+      />
+
+      <TouchableOpacity 
+        style={styles.loginButton}
+        onPress={handleLogin}>
+        <Text style={styles.text}>Login</Text>
+      </TouchableOpacity>
+
+        {/* <Text style={styles.login}>Login</Text>
 
       <EmailInput value={email} setValue={setEmail} />
       <PasswordInput
@@ -42,7 +74,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#f5f5f5',
   },
-  login: {
+  input: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -56,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
-  createAccountText: {
+  text: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
