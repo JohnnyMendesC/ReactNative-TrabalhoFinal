@@ -15,7 +15,10 @@ const Esportes = ({ route }) => {
       <Image source={sport.image} style={styles.image} />
       <Text style={styles.title}>{sport.name}</Text>
       <Text style={styles.description}>
-        Bem-vindo ao grupo de {sport.name}. Aqui você pode interagir com outros entusiastas deste esporte!
+        Bem-vindo ao grupo de {sport.name}.
+      </Text>
+      <Text style={styles.description}>
+      Aqui você pode interagir com outros entusiastas deste esporte!
       </Text>
 
       {!isAdded ? (
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 10,
     marginBottom: 20,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   title: {
     fontSize: 24,
