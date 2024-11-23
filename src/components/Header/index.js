@@ -1,7 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet, TextInput, Text, Modal, TouchableWithoutFeedback, Keyboard, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { ClimaContext } from '../ClimaContext';
+import { ClimaContext,CardClima } from '../ClimaContext';
+
+
+
 
 const Header = () => {
   const [text, setText] = useState('');

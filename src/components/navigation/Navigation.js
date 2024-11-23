@@ -3,10 +3,10 @@ import { View, Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
-import Home from '../screens/Home';
-import Perfil from '../screens/Perfil';
-import Grupos from '../screens/Grupos';
-import Cadastro from '../screens/Cadastro';
+import Home from '../../screens/Home';
+import Perfil from '../../screens/Perfil';
+import Grupos from '../../screens/Grupos';
+import Cadastro from '../../screens/Cadastro';
 
 const Tab = createBottomTabNavigator();
 

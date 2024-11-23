@@ -4,6 +4,10 @@ import { Video } from "expo-av";
 import { MaterialIcons } from '@expo/vector-icons';
 
 const Home = ({ navigation }) => {
+  const handleLogoPress =() =>{
+ 
+
+  }
   const videoRef = React.useRef(null);
 
   const posts = [
