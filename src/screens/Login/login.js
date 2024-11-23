@@ -12,6 +12,7 @@ import axios from 'axios';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [usuarioAutenticado, setUsuarioAutenticado] = useState(null); 
 
   const handleLogin = async () => {
     if (!email || !senha) {
@@ -30,7 +31,7 @@ const Login = () => {
 
       if (usuarioValido) {
         Alert.alert('Sucesso', `Bem-vindo, ${usuarioValido.nome}!`);
-        
+        setUsuarioAutenticado(usuarioValido); 
       } else {
         Alert.alert('Erro', 'E-mail ou senha inválidos.');
       }
@@ -42,6 +43,25 @@ const Login = () => {
       );
     }
   };
+
+  const handleLogout = () => {
+    setUsuarioAutenticado(null); 
+    setEmail('');
+    setSenha('');
+    Alert.alert('Logout', 'Você saiu com sucesso.');
+  };
+
+  if (usuarioAutenticado) {
+   
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Bem-vindo, {usuarioAutenticado.nome}!</Text>
+        <TouchableOpacity style={styles.button} onPress={handleLogout}>
+          <Text style={styles.buttonText}>Sair</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -60,7 +80,7 @@ const Login = () => {
         value={senha}
         onChangeText={setSenha}
         secureTextEntry
-        />
+      />
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
@@ -69,6 +89,7 @@ const Login = () => {
 };
 
 export default Login;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

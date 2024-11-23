@@ -33,6 +33,9 @@ const Navigation = () => {
             else if (route.name === 'Cadastro') {
               iconName = 'edit';
             }
+             else if (route.name === 'Login') {
+              iconName = 'sign-in'; 
+            }
 
             return <Icon name={iconName} size={size} color={color} />;
           },
