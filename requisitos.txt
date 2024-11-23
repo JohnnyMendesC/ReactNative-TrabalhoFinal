@@ -1,24 +1,24 @@
 Objetivos: Montar um app com tema livre com os seguintes requisitos:
-• Versionamento
+• Versionamento (OK)
 
-• Organização do Código
+• Organização do Código (OK)
 
-• Layout Agradável
+• Layout Agradável (OK)
 
-• Ter no mínimo quatro componentes diferentes
+• Ter no mínimo quatro componentes diferentes (Johnny, Marina)
 
-• Usar alguma forma de navegação.
+• Usar alguma forma de navegação. (Marina)
 
 • Fazer requisições a alguma API. (Johnny)
 
-• Utilizar algum tipo de animação em alguma tela.
+• Utilizar algum tipo de animação em alguma tela. (Marina)
 
-• Criar uma autenticação
+• Criar uma autenticação (Gabriela, Daiane)
 
 • Utilizar o AsyncStorage (Johnny)
 
 Bônus (Extra):
 • Monitoramento de conexão à internet, caso o dispositivo não tenha acesso a
-internet, exibir essa informação. (Johnny) PESQUISAR
+internet, exibir essa informação. (Johnny)
 
 • Splash Screen com Animação de entrada no aplicativo. (Johnny)
