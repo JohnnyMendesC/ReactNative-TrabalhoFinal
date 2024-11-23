@@ -1,22 +1,19 @@
-import React, { useState, useContext } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Text, TextInput } from "react-native-paper";
-import { Context } from "../context/authContext";
-import EmailInput from "../components/EmailInput";
-import PasswordInput from "../components/PasswordInput";
+import { Button, Text } from "react-native";
+import EmailInput from "../../components/EmailInput";
+import PasswordInput from "../../components/PasswordInput";
 
-const Login = ({ navigation }) => {
-  const { state, teste } = useContext(Context);
+export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [showPassword, setShowPassword] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.login}>Login</Text>
+      {/* <Text style={styles.login}>Login</Text>
 
       <EmailInput value={email} setValue={setEmail} />
       <PasswordInput
@@ -34,7 +31,7 @@ const Login = ({ navigation }) => {
           Não tem uma conta?{" "}
           <Text style={styles.createAccountText}>Crie uma</Text>
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </SafeAreaView>
   );
 };
@@ -65,5 +62,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default Login;
