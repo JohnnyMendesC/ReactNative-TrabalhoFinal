@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 const HeaderImage = () => (
   <View style={styles.headerContainer}>
     <Image
-      source={require('../../assets/faixa.png')} 
+      source={require('../../../assets/faixa.png')} 
       style={styles.headerImage}
     />
   </View>

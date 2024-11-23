@@ -1,10 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet, TextInput, Text, Modal, TouchableWithoutFeedback, Keyboard, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { ClimaContext,CardClima } from '../ClimaContext';
-
-
-
+import { ClimaContext } from '../ClimaContext';
 
 const Header = () => {
   const [text, setText] = useState('');
@@ -133,7 +130,7 @@ const CardClima = ({ dadosClima, buscarDadosClimaticos, setCidade, cidade, ultim
       {dadosClima && (
         <TouchableOpacity
           style={styles.botaoAtualizarDados}
-          onPress={() => buscarDadosClimaticos(cidade)}
+          onPress={() => buscarDadosClimaticos(cidade, true)}
         >
           <Text style={styles.textoBotaoAtualizar}>Atualizar Previsão</Text>
         </TouchableOpacity>
