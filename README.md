@@ -64,7 +64,7 @@ ReactNative-TrabalhoFinal/
 
 ## Residência em TIC 2024.2
 
-### Status do projeto: **EM DESENVOLVIMENTO**
+### Status do projeto: **CONCLUÍDO**
 
 ## Como executar
 
