@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Video } from "expo-av";
 import { MaterialIcons } from '@expo/vector-icons';
 
 const Home = ({ navigation }) => {
-  const handleLogoPress =() =>{
- 
+  const handleLogoPress = () => {
+
 
   }
   const videoRef = React.useRef(null);
@@ -79,52 +79,68 @@ const Home = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.videoContainer}>
-        <Video
-          ref={videoRef}
-          source={require("../../../assets/juntosvideo.mp4")}
-          style={styles.video}
-          resizeMode="contain"
-          isLooping
-          shouldPlay
-        />
-      </View>
-
-    
-
-      <View style={styles.postsContainer}>
-        {posts.map((post) => (
-          <View key={post.id} style={styles.postContainer}>
-            <View style={styles.postHeader}>
-              <Image source={post.userPhoto} style={styles.userPhoto} />
-              <Text style={styles.userName}>{post.userName}</Text>
-            </View>
-            <Image source={post.postImage} style={styles.postImage} />
-            <Text style={styles.postDescription}>{post.description}</Text>
+    <FlatList
+      data={posts}
+      keyExtractor={(item) => item.id.toString()}
+      ListHeaderComponent={
+        <>
+          <View style={styles.videoContainer}>
+            <Video
+              ref={videoRef}
+              source={require("../../../assets/juntosvideo.mp4")}
+              style={styles.video}
+              resizeMode="contain"
+              isLooping
+              shouldPlay
+            />
           </View>
-        ))}
-      </View>
 
-      <View style={styles.partnershipsContainer}>
-        <MaterialIcons name="group" size={24} color="#6200ea" style={styles.icon} />
-        <Text style={styles.partnershipsTitle}>Parcerias</Text>
-      </View>
 
-      <ScrollView
-        style={styles.horizontalScroll}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.partnershipsList}
-      >
-        {partnerships.map((partner) => (
-          <View key={partner.id} style={styles.partnerItem}>
-            <Image source={partner.logo} style={styles.partnerLogo} />
-            <Text style={styles.partnerName}>{partner.name}</Text>
+
+          <View style={styles.postsContainer}>
+            {posts.map((post) => (
+              <View key={post.id} style={styles.postContainer}>
+                <View style={styles.postHeader}>
+                  <Image source={post.userPhoto} style={styles.userPhoto} />
+                  <Text style={styles.userName}>{post.userName}</Text>
+                </View>
+                <Image source={post.postImage} style={styles.postImage} />
+                <Text style={styles.postDescription}>{post.description}</Text>
+              </View>
+            ))}
           </View>
-        ))}
-      </ScrollView>
-    </ScrollView>
+
+          <View style={styles.partnershipsContainer}>
+            <MaterialIcons name="group" size={24} color="#6200ea" style={styles.icon} />
+            <Text style={styles.partnershipsTitle}>Parcerias</Text>
+          </View>
+
+          <FlatList
+            data={partnerships}
+            keyExtractor={(item) => item.id.toString()}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item: partner }) => (
+              <View style={styles.partnerItem}>
+                <Image source={partner.logo} style={styles.partnerLogo} />
+                <Text style={styles.partnerName}>{partner.name}</Text>
+              </View>
+            )}
+            contentContainerStyle={styles.partnershipsList}
+          />
+        </>
+      }
+      renderItem={({ item: post }) => (
+        <View style={styles.postContainer}>
+          <View style={styles.postHeader}>
+            <Image source={post.userPhoto} style={styles.userPhoto} />
+            <Text style={styles.userName}>{post.userName}</Text>
+          </View>
+          <Image source={post.postImage} style={styles.postImage} />
+          <Text style={styles.postDescription}>{post.description}</Text>
+        </View>
+      )}
+    />
   );
 };
 
@@ -137,7 +153,7 @@ const styles = StyleSheet.create({
   },
   videoContainer: {
     width: '100%',
-    backgroundColor:'black'
+    backgroundColor: 'black'
   },
   video: {
     width: '100%',
