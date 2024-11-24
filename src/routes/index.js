@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
@@ -10,21 +10,39 @@ import Contato from '../screens/Contato'; // Tela Contato
 
 const Drawer = createDrawerNavigator();
 
-export default function DrawerNavigator() {
+export default function DrawerNavigator({ navigation }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const user = await AsyncStorage.getItem('@user');
+        if (user) {
+          setIsLoggedIn(true);
+        }
+      } catch (error) {
+        console.error('Erro ao verificar status de login:', error);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
 
   const handleLogout = async () => {
     try {
-      await AsyncStorage.removeItem('@user'); 
+      await AsyncStorage.removeItem('@user');
       setIsLoggedIn(false);
       Alert.alert('Logout', 'Você saiu com sucesso.');
+      // Redefine a navegação para a tela de Login
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
     } catch (error) {
       console.error('Erro ao sair:', error);
     }
   };
 
-  
   const LogoutButton = () => (
     <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
       <Text style={styles.logoutText}>Sair</Text>
@@ -46,7 +64,6 @@ export default function DrawerNavigator() {
       >
         {!isLoggedIn ? (
           <>
-        
             <Drawer.Screen name="Login">
               {() => <Login onLoginSuccess={() => setIsLoggedIn(true)} />}
             </Drawer.Screen>
@@ -54,7 +71,6 @@ export default function DrawerNavigator() {
           </>
         ) : (
           <>
-
             <Drawer.Screen name="Sobre" component={Sobre} />
             <Drawer.Screen name="Contato" component={Contato} />
           </>
