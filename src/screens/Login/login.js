@@ -8,11 +8,11 @@ import {
   StyleSheet,
 } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Login = () => {
+const Login = ({ navigation, onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [usuarioAutenticado, setUsuarioAutenticado] = useState(null); 
 
   const handleLogin = async () => {
     if (!email || !senha) {
@@ -30,8 +30,9 @@ const Login = () => {
       );
 
       if (usuarioValido) {
-        Alert.alert('Sucesso', `Bem-vindo, ${usuarioValido.nome}!`);
-        setUsuarioAutenticado(usuarioValido); 
+        await AsyncStorage.setItem('@user', JSON.stringify(usuarioValido));
+        Alert.alert('Sucesso', `Boas Vindas, ${usuarioValido.nome}!`);
+        onLoginSuccess();
       } else {
         Alert.alert('Erro', 'E-mail ou senha inválidos.');
       }
@@ -44,48 +45,29 @@ const Login = () => {
     }
   };
 
-  const handleLogout = () => {
-    setUsuarioAutenticado(null); 
-    setEmail('');
-    setSenha('');
-    Alert.alert('Logout', 'Você saiu com sucesso.');
-  };
-
-  if (usuarioAutenticado) {
-   
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Bem-vindo, {usuarioAutenticado.nome}!</Text>
-        <TouchableOpacity style={styles.button} onPress={handleLogout}>
-          <Text style={styles.buttonText}>Sair</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="E-mail"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        value={senha}
-        onChangeText={setSenha}
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Entrar</Text>
-      </TouchableOpacity>
-    </View>
-  );
+return (
+  <View style={styles.container}>
+    <Text style={styles.title}>Login</Text>
+    <TextInput
+      style={styles.input}
+      placeholder="E-mail"
+      value={email}
+      onChangeText={setEmail}
+      keyboardType="email-address"
+      autoCapitalize="none"
+    />
+    <TextInput
+      style={styles.input}
+      placeholder="Senha"
+      value={senha}
+      onChangeText={setSenha}
+      secureTextEntry
+    />
+    <TouchableOpacity style={styles.button} onPress={handleLogin}>
+      <Text style={styles.buttonText}>Entrar</Text>
+    </TouchableOpacity>
+  </View>
+);
 };
 
 export default Login;
