@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const sports = [
@@ -32,11 +32,15 @@ const GroupPage = () => {
       </TouchableOpacity>
     </TouchableOpacity>
   );
-  
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Escolha um grupo</Text>
+      {/* Header */}
+      <Image source={require('../../../assets/faixa.png')} style={styles.headerImage} />
+
+
+      <Text style={styles.headerText}>Grupos de Esportes</Text>
+
       <FlatList
         data={sports}
         keyExtractor={(item) => item.id}
@@ -44,6 +48,7 @@ const GroupPage = () => {
         numColumns={2}
         contentContainerStyle={styles.listContainer}
       />
+
     </View>
   );
 };
@@ -54,51 +59,63 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-    paddingVertical: 20,
   },
-  title: {
+  headerImage: {
+    width: '100%',
+    height: 150,
+    resizeMode: 'cover',
+  },
+  headerText: {
     fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
-    color: '#fff',
-    backgroundColor: '#4CAF50', 
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 5,
+    color: 'white',
+    backgroundColor: '#7344d9',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
     alignSelf: 'center',
+    marginVertical: 30,
   },
+
   listContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 16,
   },
+
   card: {
-    width: 150, 
-    height: 200, 
-    margin: 10,
+    width: 180, 
+    height: 240, 
+    margin: 12, 
     backgroundColor: '#fff',
-    borderRadius: 10,
-    justifyContent: 'center', 
-    alignItems: 'center', 
+    borderRadius: 12, 
+    justifyContent: 'center',
+    alignItems: 'center',
     elevation: 3,
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
   },
+
   cardImage: {
-    width: 100,
-    height: 100,
+    width: 120, 
+    height: 120, 
     resizeMode: 'contain',
-    marginBottom: 10, 
+    marginBottom: 10,
   },
+
   cardButton: {
-    backgroundColor: '#4CAF50',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    backgroundColor: '#7344d9',
+    paddingHorizontal: 12,
+    paddingVertical: 8, 
     borderRadius: 5,
   },
+
   cardButtonText: {
-    fontSize: 14,
+    fontSize: 16, 
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
