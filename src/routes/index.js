@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from '../screens/Login/login'; // Tela de Login
 import Cadastro from '../screens/Cadastro'; // Tela de Cadastro
 import Sobre from '../screens/Sobre'; // Tela Sobre
@@ -8,7 +10,27 @@ import Contato from '../screens/Contato'; // Tela Contato
 
 const Drawer = createDrawerNavigator();
 
-export default function DrawerNavigator({ onLoginSuccess }) {
+export default function DrawerNavigator() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('@user'); 
+      setIsLoggedIn(false);
+      Alert.alert('Logout', 'Você saiu com sucesso.');
+    } catch (error) {
+      console.error('Erro ao sair:', error);
+    }
+  };
+
+  
+  const LogoutButton = () => (
+    <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
+      <Text style={styles.logoutText}>Sair</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -22,11 +44,42 @@ export default function DrawerNavigator({ onLoginSuccess }) {
           drawerInactiveTintColor: 'gray',
         }}
       >
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Cadastro" component={Cadastro} />
-        <Drawer.Screen name="Sobre" component={Sobre} />
-        <Drawer.Screen name="Contato" component={Contato} />
+        {!isLoggedIn ? (
+          <>
+        
+            <Drawer.Screen name="Login">
+              {() => <Login onLoginSuccess={() => setIsLoggedIn(true)} />}
+            </Drawer.Screen>
+            <Drawer.Screen name="Cadastro" component={Cadastro} />
+          </>
+        ) : (
+          <>
+
+            <Drawer.Screen name="Sobre" component={Sobre} />
+            <Drawer.Screen name="Contato" component={Contato} />
+          </>
+        )}
       </Drawer.Navigator>
+
+      {isLoggedIn && <LogoutButton />}
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  logoutButton: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    right: 20,
+    padding: 15,
+    backgroundColor: '#ff5c5c',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  logoutText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
