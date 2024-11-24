@@ -5,6 +5,8 @@ import Esportes from '../Esportes';
 import GroupPage from './GroupPage';
 
 const Stack = createStackNavigator();
+import { View, Text } from 'react-native';
+import Login from '../Login/login';
 
 const Grupos = () => {
   return (
