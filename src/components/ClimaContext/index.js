@@ -14,19 +14,19 @@ export const ClimaProvider = ({ children }) => {
 
     const isConnected = async () => {
         try {
-            const state = await NetInfo.fetch(); // Verifica o estado da conexão
-            console.log("Conexão detectada:", state.isConnected); // Log do estado da conexão
-            return state.isConnected; // Retorna o status
+            const state = await NetInfo.fetch();
+            console.log("Conexão detectada:", state.isConnected);
+            return state.isConnected;
         } catch (error) {
-            console.log("Erro no NetInfo:", error); // Loga qualquer erro
-            return false; // Retorna `false` como fallback
+            console.log("Erro no NetInfo:", error);
+            return false;
         }
     };
 
     // 1 - Função para buscar dados climáticos
     const buscarDadosClimaticos = async (novaCidade = null, atualizar = false) => {
         try {
-            // 1.1 -Verifica se há conexão com a internet
+            // 1.1 - Verifica se há conexão com a internet
             if (!await isConnected()) {
                 console.log("Sem conexão, exibindo últimos dados salvos");
                 throw new Error("Sem conexão");
@@ -36,7 +36,6 @@ export const ClimaProvider = ({ children }) => {
             let coordenadas;
             // 2.1 - Recupera coordenadas do AsyncStorage se não estiver atualizando ou coordenadas ainda indefinidas
             if (!atualizar || !coordenadas) {
-                //await AsyncStorage.getItem("@lastCidade", cidade);
                 await AsyncStorage.setItem("@lastCidade", cidade);
                 const cidadeAtual = novaCidade || cidade;
 
