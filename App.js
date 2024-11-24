@@ -7,24 +7,31 @@ import { View } from 'react-native';
 import Navigation from './src/components/navigation/Navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import Drawer from './src/components/Drawer';
+import RoutesDrawer from './routes';
+import { preventAutoHideAsync } from 'expo-splash-screen';
+
+//preventAutoHideAsync();
 
 export default function App() {
-  const [splashComplete, setSplashComplete] = useState(false);
+  const [splashComplete, setSplashComplete] = useState(true);
 
   return (
     <ClimaProvider>
+      {/* PRIMEIRO LOAD DESTINADO A INTRO SPLASH E AO LOGIN/CADASTRO */}
+      <NavigationContainer>
+
         {!splashComplete ? (
           <Splash onComplete={() => setSplashComplete(true)} />
         ) : (
-          // o flex não precisa ser .3, é só pro drawer não sumir pois ele fica pequeno
-          <View style={{ flex: .3 }}>
-            <Drawer /> 
-          {/* Drawer só se exemplo, ele não precisa ficar aqui exatamente(os botoes dele estão quebrados) */}
+          <View style={{ flex: 1 }}>
+            <RoutesDrawer />
           </View>
         )}
-        <Header />
-        <Navigation />
-        {/* header e navigation podem estar em outro espaço também */}
-      </ClimaProvider>
+      </NavigationContainer>
+
+      {/* SEGUNDO LOAD CONDICIONADO A SOMENTE CARREGAR APÓS O LOGIN */}
+      <Header />
+      <Navigation />
+    </ClimaProvider>
   );
 }

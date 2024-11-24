@@ -4,7 +4,6 @@ import apiClima from '../../services/apiClima';
 import apiConversor from '../../services/apiConversor';
 import NetInfo from '@react-native-community/netinfo';
 import { Alert } from 'react-native';
-import { Alert } from 'react-native';
 
 export const ClimaContext = createContext();
 
@@ -27,8 +26,7 @@ export const ClimaProvider = ({ children }) => {
     // 1 - Função para buscar dados climáticos
     const buscarDadosClimaticos = async (novaCidade = null, atualizar = false) => {
         try {
-            // 1.1 -Verifica se há conexão com a internet
-            // 1.1 -Verifica se há conexão com a internet
+            // 1.1 - Verifica se há conexão com a internet
             if (!await isConnected()) {
                 console.log("Sem conexão, exibindo últimos dados salvos");
                 throw new Error("Sem conexão");
@@ -38,7 +36,6 @@ export const ClimaProvider = ({ children }) => {
             let coordenadas;
             // 2.1 - Recupera coordenadas do AsyncStorage se não estiver atualizando ou coordenadas ainda indefinidas
             if (!atualizar || !coordenadas) {
-                //await AsyncStorage.getItem("@lastCidade", cidade);
                 await AsyncStorage.setItem("@lastCidade", cidade);
                 const cidadeAtual = novaCidade || cidade;
 

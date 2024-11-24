@@ -9,7 +9,7 @@ import Cadastro from '../screens/Cadastro';
 import Login from '../screens/Login/login';
 
 const Tab = createBottomTabNavigator();
-
+console.log("Bottom Tab navigation")
 const Navigation = () => {
   return (
     <NavigationContainer>
@@ -29,11 +29,9 @@ const Navigation = () => {
               iconName = 'user';
             } else if (route.name === 'Grupos') {
               iconName = 'users';
-            }
-            else if (route.name === 'Cadastro') {
+            } else if (route.name === 'Cadastro') {
               iconName = 'edit';
-            }
-             else if (route.name === 'Login') {
+            } else if (route.name === 'Login') {
               iconName = 'sign-in'; 
             }
 
