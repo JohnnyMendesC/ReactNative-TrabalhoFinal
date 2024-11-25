@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Sobre = () => {
@@ -10,7 +10,7 @@ const Sobre = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>Sobre o App</Text>
       <Text style={styles.description}>
         Nosso aplicativo foi criado para conectar pessoas dentro de seus esportes favoritos. Um local onde você pode encontrar parceiros para jogar ou treinar junto. 
@@ -26,7 +26,7 @@ const Sobre = () => {
       <TouchableOpacity style={styles.contactButton} onPress={handleContactPress}>
         <Text style={styles.contactButtonText}>Entre em Contato</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
