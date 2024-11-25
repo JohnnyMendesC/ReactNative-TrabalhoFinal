@@ -36,9 +36,7 @@ const GroupPage = () => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <Image source={require('../../../assets/faixa.png')} style={styles.headerImage} />
-
-
+      
       <Text style={styles.headerText}>Grupos de Esportes</Text>
 
       <FlatList
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: 'white',
+    color: '#faf6f6',
     backgroundColor: '#7344d9',
     paddingHorizontal: 16,
     paddingVertical: 8,

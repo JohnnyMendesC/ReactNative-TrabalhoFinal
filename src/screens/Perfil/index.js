@@ -46,200 +46,104 @@ const ProfileScreen = () => {
     setSports(sports.filter(sport => sport !== sportToRemove));
   };
 
-  // SOLUÇÃO ALTERNATIVA PRO SCROLL DENTRO DA FLATLIST
-
-//   const data = [
-//     { type: "profile" },
-//     { type: "sports" },
-//     { type: "feed", photos },
-//   ];
-//   const renderItem = ({ item }) => {
-//     if (item.type === "profile") {
-//       return (
-//         <View>
-//           <Image
-//             source={{
-//               uri: "https://www.billboard.com/wp-content/uploads/2024/10/Lisa-07-victorias-secrect-fashion-show-live-2024-billboard-1548.jpg?w=875&h=583&crop=1",
-//             }}
-//             style={styles.profileImage}
-//           />
-//           {editMode ? (
-//             <TextInput
-//               style={styles.nameInput}
-//               value={name}
-//               onChangeText={setName}
-//               placeholder="Digite seu nome"
-//             />
-//           ) : (
-//             <Text style={styles.name}>{name}</Text>
-//           )}
-//           {editMode ? (
-//             <TextInput
-//               style={styles.descriptionInput}
-//               value={description}
-//               onChangeText={setDescription}
-//               placeholder="Digite uma descrição"
-//               multiline
-//             />
-//           ) : (
-//             <Text style={styles.description}>{description}</Text>
-//           )}
-//         </View>
-//       );
-//     }
-
-//     if (item.type === "sports") {
-//       return (
-//         <View>
-//           <Text style={styles.sectionTitle}>Esportes Favoritos</Text>
-//           {editMode ? (
-//             <View style={styles.sportInputContainer}>
-//               <TextInput
-//                 style={styles.sportInput}
-//                 placeholder="Adicionar esporte"
-//                 value={newSport}
-//                 onChangeText={setNewSport}
-//               />
-//               <TouchableOpacity style={styles.addButton} onPress={handleAddSport}>
-//                 <Text style={styles.buttonText}>Adicionar</Text>
-//               </TouchableOpacity>
-//             </View>
-//           ) : (
-//             sports.map((sport, index) => (
-//               <Text key={index} style={styles.sport}>
-//                 {sport}
-//               </Text>
-//             ))
-//           )}
-//         </View>
-//       );
-//     }
-
-//     if (item.type === "feed") {
-//       return (
-//         <View>
-//           <Text style={styles.sectionTitle}>Feed de Fotos</Text>
-//           <FlatList
-//             data={item.photos}
-//             renderItem={({ item }) => (
-//               <Image source={{ uri: item }} style={styles.feedImage} />
-//             )}
-//             keyExtractor={(item, index) => index.toString()}
-//             numColumns={2}
-//             contentContainerStyle={styles.feedContainer}
-//           />
-//         </View>
-//       );
-//     }
-
-//     return null;
-//   };
-//   return (
-//     <FlatList
-//       data={data}
-//       renderItem={renderItem}
-//       keyExtractor={(_, index) => index.toString()}
-//       contentContainerStyle={styles.container}
-//     />
-//   );
-// };
-
-
-//SOLUÇÃO PERMITIR NESTED SCROLL
-
-return (
-<ScrollView contentContainerStyle={styles.scrollContainer}>
-  <View style={styles.container}>
-    {/* Foto de Perfil */}
-    <Image
-      source={{ uri: 'https://www.billboard.com/wp-content/uploads/2024/10/Lisa-07-victorias-secrect-fashion-show-live-2024-billboard-1548.jpg?w=875&h=583&crop=1' }}
-      style={styles.profileImage}
-    />
-
-    {/* Nome do Usuário */}
-    {editMode ? (
-      <TextInput
-        style={styles.nameInput}
-        value={name}
-        onChangeText={setName}
-        placeholder="Digite seu nome"
-      />
-    ) : (
-      <Text style={styles.name}>{name}</Text>
-    )}
-
-    {/* Descrição do Perfil */}
-    {editMode ? (
-      <TextInput
-        style={styles.descriptionInput}
-        value={description}
-        onChangeText={setDescription}
-        placeholder="Digite uma descrição"
-        multiline
-      />
-    ) : (
-      <Text style={styles.description}>{description}</Text>
-    )}
-
-    {/* Esportes Favoritos */}
-    <Text style={styles.sectionTitle}>Esportes Favoritos</Text>
-    {editMode ? (
-      <>
-        {/* Adicionar Novo Esporte */}
-        <View style={styles.sportInputContainer}>
-          <TextInput
-            style={styles.sportInput}
-            placeholder="Adicionar esporte"
-            value={newSport}
-            onChangeText={setNewSport}
-          />
-          <TouchableOpacity style={styles.addButton} onPress={handleAddSport}>
-            <Text style={styles.buttonText}>Adicionar</Text>
-          </TouchableOpacity>
-        </View>
-      </>
-    ) : (
-      sports.map((sport, index) => (
-        <Text key={index} style={styles.sport}>
-          {sport}
-        </Text>
-      ))
-    )}
-
-    {/* Feed de Fotos */}
-    <Text style={styles.sectionTitle}>Feed de Fotos</Text>
-    <FlatList
-      data={photos}
-      renderItem={({ item }) => (
-        <Image source={{ uri: item }} style={styles.feedImage} />
-      )}
-      keyExtractor={(item, index) => index.toString()}
-      numColumns={2} // Mostra as imagens em 3 colunas
-      contentContainerStyle={styles.feedContainer}
+  return (
+    <ScrollView
+      contentContainerStyle={styles.scrollContainer}
       nestedScrollEnabled={true}
-    />
+    >
+      <View style={styles.container}>
+        {/* Foto de Perfil */}
+        <Image
+          source={{ uri: 'https://www.billboard.com/wp-content/uploads/2024/10/Lisa-07-victorias-secrect-fashion-show-live-2024-billboard-1548.jpg?w=875&h=583&crop=1' }}
+          style={styles.profileImage}
 
-    {/* Botões */}
-    {editMode ? (
-      <>
-        <TouchableOpacity style={styles.button} onPress={handleSaveChanges}>
-          <Text style={styles.buttonText}>Salvar Alterações</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={handleCancelEdit}>
-          <Text style={styles.buttonText}>Cancelar</Text>
-        </TouchableOpacity>
-      </>
-    ) : (
-      <TouchableOpacity style={styles.button} onPress={() => setEditMode(true)}>
-        <Text style={styles.buttonText}>Editar Perfil</Text>
-      </TouchableOpacity>
-    )}
+        />
 
-    <TouchableOpacity style={[styles.button, styles.logoutButton]}>
-      <Text style={styles.buttonText}>Logout</Text>
-    </TouchableOpacity>
-  </View>
-</ScrollView>
+        {/* Nome do Usuário */}
+        {editMode ? (
+          <TextInput
+            style={styles.nameInput}
+            value={name}
+            onChangeText={setName}
+            placeholder="Digite seu nome"
+          />
+        ) : (
+          <Text style={styles.name}>{name}</Text>
+        )}
+
+        {/* Descrição do Perfil */}
+        {editMode ? (
+          <TextInput
+            style={styles.descriptionInput}
+            value={description}
+            onChangeText={setDescription}
+            placeholder="Digite uma descrição"
+            multiline
+          />
+        ) : (
+          <Text style={styles.description}>{description}</Text>
+        )}
+
+        {/* Esportes Favoritos */}
+        <Text style={styles.sectionTitle}>Esportes Favoritos</Text>
+        {editMode ? (
+          <>
+            {/* Adicionar Novo Esporte */}
+            <View style={styles.sportInputContainer}>
+              <TextInput
+                style={styles.sportInput}
+                placeholder="Adicionar esporte"
+                value={newSport}
+                onChangeText={setNewSport}
+              />
+              <TouchableOpacity style={styles.addButton} onPress={handleAddSport}>
+                <Text style={styles.buttonText}>Adicionar</Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        ) : (
+          sports.map((sport, index) => (
+            <Text key={index} style={styles.sport}>
+              {sport}
+            </Text>
+          ))
+        )}
+
+        {/* Feed de Fotos */}
+        <Text style={styles.sectionTitle}>Feed de Fotos</Text>
+        <ScrollView
+          contentContainerStyle={styles.feedContainer}
+        >
+          {photos.map((photo, index) => (
+            <Image
+              key={index}
+              source={{ uri: photo }}
+              style={styles.feedImage}
+            />
+          ))}
+        </ScrollView>
+
+        {/* Botões */}
+        {editMode ? (
+          <>
+            <TouchableOpacity style={styles.button} onPress={handleSaveChanges}>
+              <Text style={styles.buttonText}>Salvar Alterações</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={handleCancelEdit}>
+              <Text style={styles.buttonText}>Cancelar</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={() => setEditMode(true)}>
+            <Text style={styles.buttonText}>Editar Perfil</Text>
+          </TouchableOpacity>
+        )}
+
+        {/* <TouchableOpacity style={[styles.button, styles.logoutButton]}>
+          <Text style={styles.buttonText}>Logout</Text>
+        </TouchableOpacity> */}
+      </View>
+    </ScrollView>
   );
 };
 
@@ -292,10 +196,17 @@ const styles = StyleSheet.create({
     height: 80,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 10,
-  },
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#faf6f6',
+    backgroundColor: '#7344d9',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    alignSelf: 'center',
+    marginVertical: 30,
+    },
   sport: {
     fontSize: 16,
     color: '#555',
@@ -342,8 +253,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   feedImage: {
-    width: 100,
-    height: 100,
+    width: 300,
+    height: 300,
     margin: 5,
     borderRadius: 10,
   },

@@ -7,8 +7,10 @@ import Perfil from '../../screens/Perfil';
 import Grupos from '../../screens/Grupos';
 import Cadastro from '../../screens/Cadastro';
 import Login from '../../screens/Login/login';
+import Contato from '../../screens/Contato';
 import LogoutScreen from '../LogoutScreen/LogoutScreen';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import Sobre from '../../screens/Sobre';
 
 const Tab = createBottomTabNavigator();
 console.log("Bottom Tab navigation")
@@ -20,36 +22,7 @@ const HeaderImage = () => (
     />
   </View>
 );
-const ScreenWithHeader = ({ children }) => (
-  <View style={styles.screenContainer}>
-    <HeaderImage />
-    {children}
-  </View>
-);
 
-const WrappedHome = () => (
-  <ScreenWithHeader>
-    <Home />
-  </ScreenWithHeader>
-);
-
-const WrappedPerfil = () => (
-  <ScreenWithHeader>
-    <Perfil />
-  </ScreenWithHeader>
-);
-
-const WrappedGrupos = () => (
-  <ScreenWithHeader>
-    <Grupos />
-  </ScreenWithHeader>
-);
-
-const WrappedCadastro = () => (
-  <ScreenWithHeader>
-    <Cadastro />
-  </ScreenWithHeader>
-);
 const Navigation = ({ onLogout }) => {
   return (
     <>
@@ -72,6 +45,10 @@ const Navigation = ({ onLogout }) => {
               iconName = 'edit';
             } else if (route.name === 'Login') {
               iconName = 'sign-in';
+            } else if (route.name === 'Contato') {
+              iconName = 'at';
+            } else if (route.name === 'Sobre nós') {
+              iconName = 'info-circle';
             } else if (route.name === 'Sair') {
               iconName = 'sign-out';
             }
@@ -83,20 +60,76 @@ const Navigation = ({ onLogout }) => {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Home" component={Home} />
-        {/* COM O BANNER SERIA ASSIM, MAS TEM QUE VER UM JEITO DE PASSAR DOIS COMPONENTES
-        <Tab.Screen
-          name="Home"
-          component={Home, WrappedHome}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
+        <Tab.Screen 
+        name="Home" 
+        component={Home} 
+        options={{
+          header: () => (
+            <View style={styles.headerContainer}>
+              <Image
+                source={require('../../../assets/faixa.png')}
+                style={styles.headerImage}
+              />
+            </View>
+          ),
+        }}
+        />
+        <Tab.Screen 
+        name="Perfil" 
+        component={Perfil} 
+        options={{
+          header: () => (
+            <View style={styles.headerContainer}>
+              <Image
+                source={require('../../../assets/faixa.png')}
+                style={styles.headerImage}
+              />
+            </View>
+          ),
+        }}
+        />
+        <Tab.Screen 
+        name="Grupos" 
+        component={Grupos}
+        options={{
+          header: () => (
+            <View style={styles.headerContainer}>
+              <Image
+                source={require('../../../assets/faixa.png')}
+                style={styles.headerImage}
+              />
+            </View>
+          ),
+        }}/>
+        <Tab.Screen 
+        name="Contato" 
+        component={Contato} 
+        options={{
+          header: () => (
+            <View style={styles.headerContainer}>
+              <Image
+                source={require('../../../assets/faixa.png')}
+                style={styles.headerImage}
+              />
+            </View>
+          ),
+        }}
+        />
+        <Tab.Screen 
+        name="Sobre nós" 
+        component={Sobre} 
+        options={{
+          header: () => (
+            <View style={styles.headerContainer}>
+              <Image
+                source={require('../../../assets/faixa.png')}
+                style={styles.headerImage}
+              />
+            </View>
+          ),
+        }}
+        />
 
-        <Tab.Screen name="Perfil" component={Perfil} />
-        <Tab.Screen name="Grupos" component={Grupos} />
-        {/* <Tab.Screen name="Login" component={Login} />
-        <Tab.Screen name="Cadastro" component={Cadastro} /> */}
         <Tab.Screen name="Sair">
           {() => <LogoutScreen onLogout={onLogout} />}
         </Tab.Screen>
@@ -107,14 +140,15 @@ const Navigation = ({ onLogout }) => {
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
-    height: 120,
+    height: 35,
     backgroundColor: '#ddd',
-    marginBottom: 10,
+    marginBottom: 0,
   },
   headerImage: {
     width: '100%',
-    height: '100',
+    height: 47,
     resizeMode: 'cover',
+    marginTop: -13,
   },
   screenContainer: {
     flex: 1,
